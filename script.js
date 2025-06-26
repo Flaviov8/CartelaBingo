@@ -38,15 +38,15 @@ document.addEventListener('DOMContentLoaded', function() {
         card.appendChild(header);
         
         // Criação das colunas (B, I, N, G, O)
-        const columns = ['B', 'I', 'N', 'G', 'O'];
         const grid = document.createElement('div');
         grid.className = 'bingo-grid';
         
-        // Gera números para cada coluna
-        const allNumbers = generateBingoNumbers();
+        // Gera números para a cartela (5 números de cada faixa)
+        const cardNumbers = generateCardNumbers();
         
-        for (let col = 0; col < 5; col++) {
-            for (let row = 0; row < 5; row++) {
+        // Preenche a cartela
+        for (let row = 0; row < 5; row++) {
+            for (let col = 0; col < 5; col++) {
                 const cell = document.createElement('div');
                 cell.className = 'bingo-cell';
                 
@@ -55,8 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     cell.textContent = 'FREE';
                     cell.classList.add('free');
                 } else {
-                    const numbers = allNumbers[col];
-                    cell.textContent = numbers[row];
+                    cell.textContent = cardNumbers[col][row];
                 }
                 
                 grid.appendChild(cell);
@@ -74,34 +73,38 @@ document.addEventListener('DOMContentLoaded', function() {
         return card;
     }
     
-    function generateBingoNumbers() {
-        const columns = [
-            { letter: 'B', min: 1, max: 15 },
-            { letter: 'I', min: 16, max: 30 },
-            { letter: 'N', min: 31, max: 45 },
-            { letter: 'G', min: 46, max: 60 },
-            { letter: 'O', min: 61, max: 75 }
+    function generateCardNumbers() {
+        // Define os intervalos para cada coluna
+        const ranges = [
+            { min: 1, max: 15 },   // B
+            { min: 16, max: 30 },  // I
+            { min: 31, max: 45 },  // N
+            { min: 46, max: 60 },  // G
+            { min: 61, max: 75 }   // O
         ];
         
-        const allNumbers = [];
+        const columns = [[], [], [], [], []];
+        const usedNumbers = new Set();
         
-        for (const col of columns) {
-            const numbers = [];
+        // Preenche cada coluna com 5 números únicos
+        for (let col = 0; col < 5; col++) {
+            const { min, max } = ranges[col];
             
-            // Gera 5 números únicos para a coluna
-            while (numbers.length < 5) {
-                const num = Math.floor(Math.random() * (col.max - col.min + 1)) + col.min;
-                if (!numbers.includes(num)) {
-                    numbers.push(num);
+            while (columns[col].length < 5) {
+                const num = Math.floor(Math.random() * (max - min + 1)) + min;
+                
+                // Garante que o número não se repita na cartela
+                if (!usedNumbers.has(num)) {
+                    columns[col].push(num);
+                    usedNumbers.add(num);
                 }
             }
             
-            // Ordena os números
-            numbers.sort((a, b) => a - b);
-            allNumbers.push(numbers);
+            // Ordena a coluna
+            columns[col].sort((a, b) => a - b);
         }
         
-        return allNumbers;
+        return columns;
     }
     
     function downloadPDF() {
