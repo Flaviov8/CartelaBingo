@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Cartelas de Bingo</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador de Cartelas de Bingo Redspark</h1>
+        
+        <div class="controls">
+            <label for="quantity">Quantidade de Cartelas:</label>
+            <input type="number" id="quantity" min="1" max="100" value="1">
+            
+            <button id="generate">Gerar Cartelas</button>
+            <button id="download">Download PDF</button>
+        </div>
+        
+        <div id="cards-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

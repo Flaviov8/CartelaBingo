@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background-color: #ecf0f1;
+    border-radius: 5px;
+}
+
+.controls label {
+    font-weight: bold;
+}
+
+.controls input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 60px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.bingo-card {
+    width: 300px;
+    border: 2px solid #2c3e50;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    page-break-inside: avoid;
+}
+
+.bingo-header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-bottom: 2px solid #e74c3c;
+}
+
+.bingo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+}
+
+.bingo-cell {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+.bingo-cell.free {
+    background-color: #e74c3c;
+    color: white;
+    font-size: 12px;
+}
+
+.bingo-column-header {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.bingo-id {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+@media print {
+    body {
+        background-color: white;
+        padding: 0;
+    }
+    
+    .controls {
+        display: none;
+    }
+    
+    .bingo-card {
+        box-shadow: none;
+        margin-bottom: 20px;
+    }
+}
